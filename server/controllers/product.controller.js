@@ -31,3 +31,10 @@ module.exports.updateProduct = (request, response) => {
     .then(updatedProduct => response.json(updatedProduct))
     .catch(err => response.json(err))
 }
+
+module.exports.deleteProduct = (request, response) => {
+  const { id } = request.params;
+  Product.deleteOne({_id: id})
+    .then(deleteConfirmation => response.json(deleteConfirmation))
+    .catch(err => response.json(err))
+}

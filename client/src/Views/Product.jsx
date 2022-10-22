@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { simpleGet } from '../Services/simpleGet';
 import { Routes, Route, Outlet, Link } from "react-router-dom";
+import axios from 'axios';
 
 
 export default function Product() {
@@ -17,6 +18,10 @@ export default function Product() {
     getProductFromService();
   }, []);
 
+  const deleteProduct = (id) => {
+    axios.delete(`http://localhost:8000/api/product/delete/${id}`)
+  }
+
   return (
     <div>
       {
@@ -29,7 +34,10 @@ export default function Product() {
           </div>
         )
       }
+      <button><Link to={"/"} onClick={()=>deleteProduct(id)}>DELETE</Link></button>
+      <button>
       <Link to='/'>volver</Link>
+      </button>
     </div>
   )
 }
